@@ -2,6 +2,12 @@ plugins {
     id 'java'
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 group = 'ru.soft'
 version = '1.0-SNAPSHOT'
 
@@ -10,10 +16,26 @@ repositories {
 }
 
 dependencies {
+    // JUnit 5
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+    //testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    //testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+
+    // AssertJ
+    testImplementation 'org.assertj:assertj-core:3.24.2'
+
+    // Mockito
+    testImplementation 'org.mockito:mockito-core:5.3.1'
+    testImplementation 'org.mockito:mockito-junit-jupiter:5.3.1'
+
+    //testImplementation platform('org.junit:junit-bom:5.10.0')
+    //testImplementation 'org.junit.jupiter:junit-jupiter'
 }
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
